@@ -8,6 +8,7 @@ gem "sinatra"
 gem "sinatra-contrib"
 gem "puma"
 gem "dotenv"
+gem "rack"
 
 group :development do
   gem "better_errors"

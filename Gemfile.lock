@@ -58,6 +58,7 @@ DEPENDENCIES
   dotenv
   pry
   puma
+  rack
   sinatra
   sinatra-contrib
 

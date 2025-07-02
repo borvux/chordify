@@ -1,0 +1,40 @@
+<div class="container">
+  <h1>Chordify</h1>
+  <div class="song-selection">
+    <form action="/" method="get">
+      <label for="song-select">Select Song:</label>
+      <select name="song" id="song-select" onchange="this.form.submit()">
+        <% @available_songs.each do |song| %>
+          <option value="<%= song %>" <%= 'selected' if song == @selected_song_filename %>>
+            <%= song.gsub('_', ' ').gsub('.txt', '').titleize %>
+          </option>
+          <% end %>
+        </select>
+      </form>
+    </div>
+    <div class="controls">
+      <form action="/transpose" method="post">
+        <input type="hidden" name="song" value="<%= @selected_song_filename %>">
+        <button type="submit" name="direction" value="down">Transpose Down (-1)</button>
+        <button type="submit" name="direction" value="up">Transpose Up (+1)</button>
+        <button type="submit" name="direction" value="reset" class="reset">Reset</button>
+      </form>
+    </div>
+    <div class="scroll-controls">
+      <button id="start-stop-scroll">Start Auto-Scroll</button>
+      <div class="speed-control">
+        <label for="speed-slider">Speed</label>
+        <input type="range" id="speed-slider" min="1" max="20" value="5" title="Adjust scroll speed">
+        <span id="speed-display">5</span>
+      </div>
+    </div>
+    <p class="current-key">
+      Current Transposition for <%= @selected_song_filename.gsub('_', ' ').gsub('.txt', '').capitalize %>: <%= @current_total_semitones %> semitones
+    </p>
+    <h2>Notes</h2>
+    <% if @transposed_text %>
+      <pre><%= @transposed_text %></pre>
+    <% else %>
+      <p>Select a song to view</p>
+    <% end %>
+  </div>

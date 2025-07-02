@@ -17,7 +17,6 @@ module ChordTransposer
     base_note = match[1]
     suffix = chord[base_note.length..-1]
 
-    # Normalize flats to sharps for consistent lookup
     normalized_note = FLAT_TO_SHARP[base_note] || base_note
 
     current_index = NOTES.index(normalized_note)
@@ -35,7 +34,6 @@ module ChordTransposer
   end
 
   def self.is_chord_line?(line)
-    # This heuristic checks if more than 50% of "words" look like chords.
     words = line.strip.split(/\s+/)
     return false if words.empty?
 

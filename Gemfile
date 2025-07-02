@@ -5,10 +5,10 @@ source "https://rubygems.org"
 ruby "3.2.1"
 
 gem "sinatra"
-gem "rack"
 gem "sinatra-contrib"
 gem "puma"
 gem "dotenv"
+gem "activesupport"
 
 group :development do
   gem "better_errors"

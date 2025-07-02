@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: chordify
+    env: ruby
+    plan: free
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "./bin/render-start.sh"

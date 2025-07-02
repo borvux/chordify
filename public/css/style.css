@@ -1,0 +1,174 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 10px;
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #1e1e1e;
+    padding: 20px 30px;
+    border-radius: 8px;
+    border: 1px solid #333;
+}
+
+h1,
+h2 {
+    color: #6bb8ff;
+    text-align: center;
+}
+
+.song-selection {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#song-select {
+    width: 50%;
+    padding: 8px;
+    border-radius: 5px;
+    background-color: #333;
+    color: #e0e0e0;
+    border: 1px solid #555;
+    font-size: 1em;
+}
+
+pre {
+    background-color: #282c34;
+    padding: 15px;
+    border-radius: 5px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'Courier New', Courier, monospace;
+    line-height: 1.4;
+    font-size: 1.1em;
+    border: 1px solid #444;
+    color: #e0e0e0;
+}
+
+.controls {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.controls form {
+    display: inline-block;
+    margin: 5px;
+}
+
+.controls button {
+    background-color: #3d8bfd;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+    width: auto;
+}
+
+.controls button:hover {
+    background-color: #0056b3;
+}
+
+.controls button.reset {
+    background-color: #d9534f;
+}
+
+.controls button.reset:hover {
+    background-color: #c9302c;
+}
+
+.current-key {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 1.1em;
+    color: #aaa;
+}
+
+.scroll-controls {
+    text-align: center;
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #282c34;
+    border-radius: 8px;
+    border: 1px solid #444;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.scroll-controls button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+    width: 200px;
+}
+
+.scroll-controls button.scrolling {
+    background-color: #dc3545;
+}
+
+.speed-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #e0e0e0;
+}
+
+#speed-slider {
+    cursor: pointer;
+    width: 150px;
+}
+
+#speed-display {
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #1e1e1e;
+    padding: 2px 8px;
+    border-radius: 4px;
+    border: 1px solid #555;
+}
+
+
+@media (max-width: 600px) {
+    body {
+        padding: 5px;
+    }
+
+    .container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+
+    #song-select {
+        width: 100%;
+    }
+
+    .controls form {
+        display: block;
+        margin: 20px 0;
+    }
+
+    .controls button {
+        width: 100%;
+    }
+
+    .scroll-controls {
+        flex-direction: column;
+    }
+}

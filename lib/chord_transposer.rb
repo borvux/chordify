@@ -1,11 +1,14 @@
+# frozen_string_literal: true
+
+# provides functionality for transposing musical chords within a line of text.
 module ChordTransposer
   NOTES = %w[A A# B C C# D D# E F F# G G#].freeze
-  CHORD_REGEX = /\b([A-G][b#]?(m|maj|min|sus|dim|aug|add)?(\d+)?(M)?)\b/.freeze
+  CHORD_REGEX = /\b([A-G][b#]?(m|maj|min|sus|dim|aug|add)?(\d+)?(M)?)\b/
 
   FLAT_TO_SHARP = {
-    "Ab" => "G#", "Bb" => "A#", "Cb" => "B",
-    "Db" => "C#", "Eb" => "D#", "Fb" => "E",
-    "Gb" => "F#",
+    'Ab' => 'G#', 'Bb' => 'A#', 'Cb' => 'B',
+    'Db' => 'C#', 'Eb' => 'D#', 'Fb' => 'E',
+    'Gb' => 'F#'
   }.freeze
 
   def self.transpose_chord(chord, semitones)
@@ -15,7 +18,7 @@ module ChordTransposer
     return chord unless match
 
     base_note = match[1]
-    suffix = chord[base_note.length..-1]
+    suffix = chord[base_note.length..]
 
     normalized_note = FLAT_TO_SHARP[base_note] || base_note
 
@@ -33,7 +36,7 @@ module ChordTransposer
     end
   end
 
-  def self.is_chord_line?(line)
+  def self.chord_line?(line)
     words = line.strip.split(/\s+/)
     return false if words.empty?
 

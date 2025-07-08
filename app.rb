@@ -1,33 +1,35 @@
-require "sinatra"
-require "sinatra/reloader"
-require "erb"
-require "active_support/core_ext/string/inflections"
-require_relative "lib/chord_transposer"
+# frozen_string_literal: true
+
+require 'sinatra'
+require 'sinatra/reloader'
+require 'erb'
+require 'active_support/core_ext/string/inflections'
+require_relative 'lib/chord_transposer'
 
 enable :sessions
 
 def songs_dir_path
-  File.join(File.dirname(__FILE__), "songs")
+  File.join(File.dirname(__FILE__), 'songs')
 end
 
-def get_available_songs
-  Dir.glob(File.join(songs_dir_path, "*.txt")).map { |f| File.basename(f) }.sort
+def available_songs
+  Dir.glob(File.join(songs_dir_path, '*.txt')).map { |f| File.basename(f) }.sort
 rescue Errno::ENOENT
   []
 end
 
 before do
   session[:song_transpositions] ||= {}
-  @available_songs = get_available_songs
+  @available_songs = available_songs
 
   @selected_song_filename = params[:song] || session[:current_song] || @available_songs.first
   session[:current_song] = @selected_song_filename
 end
 
-get "/" do
+get '/' do
   if @available_songs.empty?
     status 404
-    return "<h1>Error: No song files found!</h1><p>Please create a 'songs' directory and place .txt files inside it.</p>"
+    return "<h1>Error: No song files found!</h1><p>Please add .txt files inside the 'songs' directory .</p>"
   end
 
   unless @selected_song_filename && @available_songs.include?(@selected_song_filename)
@@ -47,7 +49,7 @@ get "/" do
   original_lines = File.readlines(song_file_path)
   transposed_lines = original_lines.map do |line|
     line_to_process = line.chomp
-    if ChordTransposer.is_chord_line?(line_to_process)
+    if ChordTransposer.chord_line?(line_to_process)
       ChordTransposer.transpose_line(line_to_process, @current_total_semitones)
     else
       line_to_process
@@ -59,19 +61,19 @@ get "/" do
   erb :index
 end
 
-post "/transpose" do
-  redirect "/" unless session[:current_song]
+post '/transpose' do
+  redirect '/' unless session[:current_song]
 
   current_song = session[:current_song]
 
   session[:song_transpositions][current_song] ||= 0
 
   case params[:direction]
-  when "up"
+  when 'up'
     session[:song_transpositions][current_song] += 1
-  when "down"
+  when 'down'
     session[:song_transpositions][current_song] -= 1
-  when "reset"
+  when 'reset'
     session[:song_transpositions][current_song] = 0
   end
 
